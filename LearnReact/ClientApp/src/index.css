@@ -1,0 +1,72 @@
+html {
+    margin: 0px;
+    padding: 0px;
+    /*direction: rtl;*/
+}
+
+body {
+    background-color: #64b3eb;
+}
+
+.slider {
+    width: 100%;
+    padding: 10px;
+}
+
+    .slider > ul {
+        margin: 0px;
+        padding: 0px;
+        width: 100%;
+    }
+
+        .slider > ul > li {
+            list-style: none;
+            margin: 0px;
+            padding: 0px;
+            float: right;
+            width: 100%;
+            display: none;
+        }
+
+            .slider > ul > li.active {
+                display: list-item;
+            }
+
+            .slider > ul > li > h3 {
+                margin: auto;
+                padding: 10px;
+                width: 100%;
+                text-align: center;
+                display: block;
+            }
+
+            .slider > ul > li > ul {
+                margin: 0px;
+                padding: 0px;
+                width: 100%;
+            }
+
+                .slider > ul > li > ul > li {
+                    list-style: none;
+                    margin: 0px;
+                    padding: 10px;
+                    width: 100%;
+                    color: white;
+                    cursor: pointer;
+                    text-align: center;
+                }
+
+                    .slider > ul > li > ul > li:hover {
+                        background-color: #1a6da9;
+                    }
+
+                    .slider > ul > li > ul > li.selected {
+                        background-color: #17517c;
+                    }
+
+@media (max-width: 767px) {
+    /* On small screens, the nav menu spans the full width of the screen. Leave a space for it. */
+    body {
+        padding-top: 50px;
+    }
+}
