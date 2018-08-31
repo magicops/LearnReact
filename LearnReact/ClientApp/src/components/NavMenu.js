@@ -2,13 +2,14 @@
 import { Link } from 'react-router-dom';
 import { Glyphicon, Nav, Navbar, NavItem } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
+import { labels } from '../constants';
 import './NavMenu.css';
 
 export default props => (
     <Navbar inverse fixedTop fluid collapseOnSelect>
         <Navbar.Header>
             <Navbar.Brand>
-                <Link to={'/'}>LearnReact</Link>
+                <Link to={'/'}>{labels.projectTitle}</Link>
             </Navbar.Brand>
             <Navbar.Toggle />
         </Navbar.Header>
@@ -28,11 +29,6 @@ export default props => (
                     <NavItem>
                         <Glyphicon glyph='th-list' /> Fetch data
                     </NavItem>
-                </LinkContainer>
-                <LinkContainer to={'/test'}>
-                    <NavItem>
-                        <Glyphicon glyph='refresh' /> Test
-                        </NavItem>
                 </LinkContainer>
                 <LinkContainer to={'/form'}>
                     <NavItem>

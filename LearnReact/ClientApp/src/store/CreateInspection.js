@@ -1,4 +1,4 @@
-﻿import { CommonActions, Lists } from '../constants';
+﻿import { CommonActions } from '../constants';
 
 const loading = 'CI_LOADING';
 const loaded = 'CI_LOADED';
@@ -10,10 +10,6 @@ const initialState = {
     actions: [],
     stages: [],
     departments: [],
-    selectedRule: null,
-    selectedAction: null,
-    selectedDepartment: null,
-    selectedStage: null,
     selectedDate: null
 };
 
@@ -80,35 +76,8 @@ export const reducer = (state, action) => {
         };
     }
 
-    if (action.type === CommonActions.selectItem) {
-
-        switch (action.list) {
-            case Lists.departments:
-                return {
-                    ...state,
-                    selectedDepartment: action.id
-                };
-            case Lists.rules:
-                return {
-                    ...state,
-                    selectedRule: action.id
-                };
-            case Lists.actions:
-                return {
-                    ...state,
-                    selectedAction: action.id
-                };
-            case Lists.stages:
-                return {
-                    ...state,
-                    selectedStage: action.id
-                };
-            default:
-                return {
-                    ...state
-                };
-
-        }
+    if (action.type === CommonActions.saveInspection) {
+        console.log(action.selectedItems);
     }
 
     return state;

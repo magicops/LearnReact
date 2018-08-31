@@ -11,44 +11,29 @@ class CreateInspection extends Component {
     }
 
     render() {
+        const lists = [
+            {
+                title: Lists.departments,
+                items: this.props.departments
+            },
+            {
+                title: Lists.rules,
+                items: this.props.rules
+            },
+            {
+                title: Lists.actions,
+                items: this.props.actions
+            },
+            {
+                title: Lists.stages,
+                items: this.props.stages
+            }
+        ];
+
         return (
-            <div>
-                {this.props.loading ? "Loading..." :
-                    <Slider lists={
-                        [
-                            {
-                                title: Lists.departments,
-                                items: this.props.departments
-                            },
-                            {
-                                title: Lists.rules,
-                                items: this.props.rules
-                            },
-                            {
-                                title: Lists.actions,
-                                items: this.props.actions
-                            },
-                            {
-                                title: Lists.stages,
-                                items: this.props.stages
-                            }
-                        ]
-                    } />
-                }
-                {this.props.selectedDepartment}
-                <br />
-                {this.props.selectedRule}
-                <br />
-                {this.props.selectedAction}
-                <br />
-                {this.props.selectedStage}
-                <br />
-                <button onClick={() => {
-                    this.props.loading ?
-                        this.props.hideLoading() :
-                        this.props.showLoading();
-                }}>Next</button>
-            </div >
+            <div className="create-inspection">
+                {this.props.loading ? "Loading..." : <Slider lists={lists} />}
+            </div>
         );
     }
 }
