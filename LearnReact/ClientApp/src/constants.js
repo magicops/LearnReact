@@ -1,20 +1,21 @@
-﻿export const CommonActions = {
-    saveInspection: 'INSPECTION_SAVE'
-};
+﻿export const CommonActions = {};
 
 export const labels = {
     projectTitle: 'LearnReact',
     save: 'Save',
     departments: 'Departments',
     rules: 'Rules',
-    stages: 'Stages',
+    procedures: 'Procedures',
     actions: 'Actions',
-    select__List: 'Select __ before save.'
+    select__List: 'Select __ before save.',
+    saveFaild: 'Saving process has been faild.',
+    resetForm: 'New Entry',
+    saveSuccessful: 'Inspection has been saved sucessfully.'
 };
 
 export const Lists = {
     departments: labels.departments,
     rules: labels.rules,
-    stages: labels.stages,
+    procedures: labels.procedures,
     actions: labels.actions
 }

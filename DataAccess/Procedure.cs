@@ -4,7 +4,7 @@ using System.Text;
 
 namespace DataAccess
 {
-    public class Stage
+    public class Procedure
     {
         public int Id { get; set; }
         public string Title { get; set; }

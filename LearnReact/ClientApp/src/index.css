@@ -11,6 +11,27 @@ body {
     height: 100%;
 }
 
+.loading {
+    width: 75px;
+    margin: 50px auto;
+}
+
+.success-result {
+    padding: 10px;
+    text-align: center;
+}
+
+.myButton {
+    cursor: pointer !important;
+    color: white !important;
+    background-color: #479fdd !important;
+    text-decoration: none !important;
+}
+
+    .myButton:focus, .myButton:hover {
+        background-color: #3594d7 !important;
+    }
+
 #root, .full-height, .create-inspection {
     height: 100%;
 }
@@ -74,6 +95,7 @@ body {
 
         .slider .footer .alert {
             padding: 5px;
+            margin: 0px;
             margin-left: 5px;
         }
 

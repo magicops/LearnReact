@@ -13,6 +13,6 @@ namespace DataAccess
         public DbSet<Action> Actions { get; set; }
         public DbSet<Inspection> Inspections { get; set; }
         public DbSet<Rule> Rules { get; set; }
-        public DbSet<Stage> Stages { get; set; }
+        public DbSet<Procedure> Procedures { get; set; }
     }
 }

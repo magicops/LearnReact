@@ -11,56 +11,56 @@ namespace LearnReact.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class StagesController : ControllerBase
+    public class ProceduresController : ControllerBase
     {
         private readonly TestContext _context;
 
-        public StagesController(TestContext context)
+        public ProceduresController(TestContext context)
         {
             _context = context;
         }
 
-        // GET: api/Stages
+        // GET: api/Procedures
         [HttpGet]
-        public IEnumerable<Stage> GetStages()
+        public IEnumerable<Procedure> GetProcedures()
         {
-            return _context.Stages;
+            return _context.Procedures;
         }
 
-        // GET: api/Stages/5
+        // GET: api/Procedures/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetStage([FromRoute] int id)
+        public async Task<IActionResult> GetProcedure([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var stage = await _context.Stages.FindAsync(id);
+            var Procedure = await _context.Procedures.FindAsync(id);
 
-            if (stage == null)
+            if (Procedure == null)
             {
                 return NotFound();
             }
 
-            return Ok(stage);
+            return Ok(Procedure);
         }
 
-        // PUT: api/Stages/5
+        // PUT: api/Procedures/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutStage([FromRoute] int id, [FromBody] Stage stage)
+        public async Task<IActionResult> PutProcedure([FromRoute] int id, [FromBody] Procedure Procedure)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != stage.Id)
+            if (id != Procedure.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(stage).State = EntityState.Modified;
+            _context.Entry(Procedure).State = EntityState.Modified;
 
             try
             {
@@ -68,7 +68,7 @@ namespace LearnReact.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!StageExists(id))
+                if (!ProcedureExists(id))
                 {
                     return NotFound();
                 }
@@ -81,45 +81,45 @@ namespace LearnReact.Controllers
             return NoContent();
         }
 
-        // POST: api/Stages
+        // POST: api/Procedures
         [HttpPost]
-        public async Task<IActionResult> PostStage([FromBody] Stage stage)
+        public async Task<IActionResult> PostProcedure([FromBody] Procedure Procedure)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            _context.Stages.Add(stage);
+            _context.Procedures.Add(Procedure);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetStage", new { id = stage.Id }, stage);
+            return CreatedAtAction("GetProcedure", new { id = Procedure.Id }, Procedure);
         }
 
-        // DELETE: api/Stages/5
+        // DELETE: api/Procedures/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteStage([FromRoute] int id)
+        public async Task<IActionResult> DeleteProcedure([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var stage = await _context.Stages.FindAsync(id);
-            if (stage == null)
+            var Procedure = await _context.Procedures.FindAsync(id);
+            if (Procedure == null)
             {
                 return NotFound();
             }
 
-            _context.Stages.Remove(stage);
+            _context.Procedures.Remove(Procedure);
             await _context.SaveChangesAsync();
 
-            return Ok(stage);
+            return Ok(Procedure);
         }
 
-        private bool StageExists(int id)
+        private bool ProcedureExists(int id)
         {
-            return _context.Stages.Any(e => e.Id == id);
+            return _context.Procedures.Any(e => e.Id == id);
         }
     }
 }

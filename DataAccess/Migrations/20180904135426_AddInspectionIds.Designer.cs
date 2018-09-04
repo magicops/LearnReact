@@ -4,14 +4,16 @@ using DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(TestContext))]
-    partial class TestContextModelSnapshot : ModelSnapshot
+    [Migration("20180904135426_AddInspectionIds")]
+    partial class AddInspectionIds
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -57,9 +59,9 @@ namespace DataAccess.Migrations
 
                     b.Property<int>("DepartmentId");
 
-                    b.Property<int>("ProcedureId");
-
                     b.Property<int>("RuleId");
+
+                    b.Property<int>("StageId");
 
                     b.HasKey("Id");
 
@@ -67,24 +69,11 @@ namespace DataAccess.Migrations
 
                     b.HasIndex("DepartmentId");
 
-                    b.HasIndex("ProcedureId");
-
                     b.HasIndex("RuleId");
 
+                    b.HasIndex("StageId");
+
                     b.ToTable("Inspections");
-                });
-
-            modelBuilder.Entity("DataAccess.Procedure", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Title");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Procedures");
                 });
 
             modelBuilder.Entity("DataAccess.Rule", b =>
@@ -100,6 +89,19 @@ namespace DataAccess.Migrations
                     b.ToTable("Rules");
                 });
 
+            modelBuilder.Entity("DataAccess.Stage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Title");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Stages");
+                });
+
             modelBuilder.Entity("DataAccess.Inspection", b =>
                 {
                     b.HasOne("DataAccess.Action", "Action")
@@ -112,14 +114,14 @@ namespace DataAccess.Migrations
                         .HasForeignKey("DepartmentId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("DataAccess.Procedure", "Procedure")
-                        .WithMany()
-                        .HasForeignKey("ProcedureId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
                     b.HasOne("DataAccess.Rule", "Rule")
                         .WithMany()
                         .HasForeignKey("RuleId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("DataAccess.Stage", "Stage")
+                        .WithMany()
+                        .HasForeignKey("StageId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
