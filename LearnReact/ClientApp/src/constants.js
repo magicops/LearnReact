@@ -9,6 +9,7 @@ export const labels = {
     actions: 'Actions',
     select__List: 'Select __ before save.',
     saveFaild: 'Saving process has been faild.',
+    loadFaild: 'Loading process has been faild.',
     resetForm: 'New Entry',
     saveSuccessful: 'Inspection has been saved sucessfully.'
 };

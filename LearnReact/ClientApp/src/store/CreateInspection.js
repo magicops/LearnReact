@@ -36,11 +36,24 @@ export const actionCreators = {
         dispatch({ type: loading });
 
         const promises = {
-            rules: await fetch("api/Rules"),
+            rules: await fetch("api/Rules", {
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('user')}`
+                }
+            }),
             departments: await fetch("api/Departments"),
             actions: await fetch('api/Actions'),
             procedures: await fetch('api/Procedures')
         };
+
+        if (!promises.rules.ok ||
+            !promises.departments.ok ||
+            !promises.actions.ok ||
+            !promises.procedures.ok) {
+            dispatch({ type: hideLoading });
+            dispatch({ type: error, message: labels.loadFaild });
+            return;
+        }
 
         const results = {
             rules: await promises.rules.json(),
@@ -88,10 +101,6 @@ export const actionCreators = {
         const promise = await fetch('api/Inspections',
             {
                 method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                },
                 body: JSON.stringify(inspection)
             });
 

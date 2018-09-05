@@ -1,17 +1,16 @@
 ﻿using DataAccess;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
 using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace LearnReact.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class RulesController : ControllerBase
     {
         private readonly TestContext _context;
@@ -121,30 +120,6 @@ namespace LearnReact.Controllers
         private bool RuleExists(int id)
         {
             return _context.Rules.Any(e => e.Id == id);
-        }
-
-        // GET: api/Rules/GetToken
-        [HttpGet("GetToken")]
-        public IActionResult GetToken()
-        {
-            var claims = new[]
-                {
-                  new Claim(JwtRegisteredClaimNames.Sub, "jeremy@jeremylikness.com"),
-                  new Claim(JwtRegisteredClaimNames.Jti, System.Guid.NewGuid().ToString()),
-                };
-
-            var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(Startup.SECRET));
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-
-            var token = new JwtSecurityToken("http://localhost:44340", //issued by
-                "http://localhost:44343", //issued for
-                claims, //payload
-                expires: System.DateTime.Now.AddMinutes(30), // valid for 1/2 hour
-                signingCredentials: creds); // signature
-
-            var tokenEncoded = new JwtSecurityTokenHandler().WriteToken(token);
-
-            return new OkObjectResult(new { token = tokenEncoded });
         }
     }
 }

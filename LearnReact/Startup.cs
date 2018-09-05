@@ -1,20 +1,21 @@
+using DataAccess;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-
-using DataAccess;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace LearnReact
 {
     public class Startup
     {
-        public static string SECRET = "Secret@2018";
+        public static string SECRET = "MySecretKey@2018!";
+        public static string DOMAIN = "http://localhost:44343";
 
 
         public Startup(IConfiguration configuration)
@@ -27,6 +28,22 @@ namespace LearnReact
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidateLifetime = true,
+                        ValidateIssuerSigningKey = true,
+                        ValidIssuer = DOMAIN,
+                        ValidAudience = DOMAIN,
+                        IssuerSigningKey = new SymmetricSecurityKey(
+                            Encoding.UTF8.GetBytes(SECRET))
+                    };
+                });
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             // In production, the React files will be served from this directory
@@ -37,27 +54,6 @@ namespace LearnReact
 
             var connection = @"Server=(localdb)\mssqllocaldb;Database=LearnReact;Trusted_Connection=True;ConnectRetryCount=0";
             services.AddDbContext<TestContext>(options => options.UseSqlServer(connection));
-
-            //services.AddAuthentication(options =>
-            //{
-            //    options.DefaultAuthenticateScheme = "JwtBearer";
-            //    options.DefaultChallengeScheme = "JwtBearer";
-            //})
-            //.AddJwtBearer("JwtBearer", jwtBearerOptions =>
-            //{
-            //    jwtBearerOptions.TokenValidationParameters = new TokenValidationParameters
-            //    {
-            //        ValidateIssuerSigningKey = true, // verify signature to avoid tampering
-            //        IssuerSigningKey =
-            //          new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(SECRET)),
-            //        ValidateIssuer = true,
-            //        ValidIssuer = "http://localhost:5001", // site that makes the token
-            //        ValidateAudience = true,
-            //        ValidAudience = "http://localhost:5000", // site that consumes the token
-            //        ValidateLifetime = true, //validate the expiration 
-            //        ClockSkew = System.TimeSpan.FromMinutes(5) // tolerance for the expiration date
-            //    };
-            //});
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -77,7 +73,7 @@ namespace LearnReact
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
 
-            //app.UseAuthentication();
+            app.UseAuthentication();
 
             app.UseMvc(routes =>
             {

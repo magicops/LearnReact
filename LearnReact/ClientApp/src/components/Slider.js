@@ -72,9 +72,9 @@ const Slider = props => {
 
         <div className="clearfix"></div>
         <div className="footer">
-            {props.step === 1 ? "" : prevButton}
+            {props.step !== 1 && prevButton}
             {lastStep ? saveButton : nextButton}
-            {lastStep ? errorMessage : ""}
+            {lastStep && errorMessage}
             <div className="clearfix"></div>
         </div>
     </div >;
