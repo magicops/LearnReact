@@ -30,7 +30,7 @@ namespace LearnReact.Controllers
                 };
 
                 var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(Startup.SECRET));
-                var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256Signature);
+                var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
                 var token = new JwtSecurityToken(
                     issuer: Startup.DOMAIN,

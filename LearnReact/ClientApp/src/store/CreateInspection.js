@@ -10,6 +10,7 @@ const error = 'CI_ERROR';
 const sliderNext = 'SLIDER_NEXT';
 const sliderPrev = 'SLIDER_PREV';
 const selectItem = 'SLIDER_SELECTITEM';
+const dismissError = 'SLIDER_DISMISSERROR';
 
 const initialState = {
     loading: false,
@@ -37,6 +38,7 @@ export const actionCreators = {
     sliderNext: () => ({ type: sliderNext }),
     sliderPrev: () => ({ type: sliderPrev }),
     reset: () => ({ type: reset }),
+    dismissError: () => ({ type: dismissError }),
 
     selectItem: (list, id) => ({ type: selectItem, list, id }),
     loadAll: () => async (dispatch) => {
@@ -189,6 +191,13 @@ export const reducer = (state, action) => {
             ...state,
             loading: false,
             error: action.message
+        };
+    }
+
+    if (action.type === dismissError) {
+        return {
+            ...state,
+            error: null
         };
     }
 

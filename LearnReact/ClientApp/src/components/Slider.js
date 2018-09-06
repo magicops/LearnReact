@@ -6,12 +6,9 @@ import { labels } from '../constants';
 const Slider = props => {
 
     function save(e) {
-        e.preventDefault(); props.onSave(props.lists, props.selectedItems);
+        e.preventDefault();
+        props.onSave(props.lists, props.selectedItems);
     }
-
-    const errorMessage = props.error ?
-        <Alert bsStyle="danger" className="pull-left">{props.error}</Alert>
-        : null;
 
     const lastStep = props.step === props.lists.length;
 
@@ -55,6 +52,9 @@ const Slider = props => {
     };
 
     return <div className="slider">
+        {props.error &&
+            <Alert bsStyle="danger" className="floating-alert" onDismiss={() => { props.onDismissError() }}>{props.error}</Alert>
+        }
 
         <TransitionGroup className="slider-wrapper">
             {
@@ -74,7 +74,6 @@ const Slider = props => {
         <div className="footer">
             {props.step !== 1 && prevButton}
             {lastStep ? saveButton : nextButton}
-            {lastStep && errorMessage}
             <div className="clearfix"></div>
         </div>
     </div >;

@@ -60,6 +60,7 @@ class CreateInspection extends Component {
                 onSelectItem={(list, id) => this.props.selectItem(list, id)}
                 onNext={() => this.props.sliderNext()}
                 onPrev={() => this.props.sliderPrev()}
+                onDismissError={() => { this.props.dismissError() }}
             />;
 
         return <div className="create-inspection">{output}</div>;

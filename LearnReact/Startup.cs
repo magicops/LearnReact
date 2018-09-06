@@ -39,8 +39,7 @@ namespace LearnReact
                         ValidateIssuerSigningKey = true,
                         ValidIssuer = DOMAIN,
                         ValidAudience = DOMAIN,
-                        IssuerSigningKey = new SymmetricSecurityKey(
-                            Encoding.UTF8.GetBytes(SECRET))
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(SECRET))
                     };
                 });
 
