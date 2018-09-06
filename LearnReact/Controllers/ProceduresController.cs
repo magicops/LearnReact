@@ -11,6 +11,7 @@ namespace LearnReact.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Microsoft.AspNetCore.Authorization.Authorize]
     public class ProceduresController : ControllerBase
     {
         private readonly TestContext _context;

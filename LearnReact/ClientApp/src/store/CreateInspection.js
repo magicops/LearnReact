@@ -1,4 +1,5 @@
 ﻿import { Lists, labels } from "../constants";
+import * as Auth from '../helpers/Auth';
 
 const loading = 'CI_LOADING';
 const loaded = 'CI_LOADED';
@@ -23,6 +24,13 @@ const initialState = {
     selectedItems: {}
 };
 
+const fetchOptions = {
+    headers: {
+        'Authorization': `Bearer ${Auth.getToken()}`,
+        'Content-Type': 'application/json'
+    }
+};
+
 export const actionCreators = {
     showLoading: () => ({ type: loading }),
     hideLoading: () => ({ type: hideLoading }),
@@ -36,14 +44,10 @@ export const actionCreators = {
         dispatch({ type: loading });
 
         const promises = {
-            rules: await fetch("api/Rules", {
-                headers: {
-                    'Authorization': `Bearer ${localStorage.getItem('user')}`
-                }
-            }),
-            departments: await fetch("api/Departments"),
-            actions: await fetch('api/Actions'),
-            procedures: await fetch('api/Procedures')
+            rules: await fetch("api/Rules", fetchOptions),
+            departments: await fetch("api/Departments", fetchOptions),
+            actions: await fetch('api/Actions', fetchOptions),
+            procedures: await fetch('api/Procedures', fetchOptions)
         };
 
         if (!promises.rules.ok ||
@@ -100,6 +104,7 @@ export const actionCreators = {
         
         const promise = await fetch('api/Inspections',
             {
+                ...fetchOptions,
                 method: 'POST',
                 body: JSON.stringify(inspection)
             });

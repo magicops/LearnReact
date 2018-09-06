@@ -1,5 +1,4 @@
 ﻿using DataAccess;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -10,7 +9,7 @@ namespace LearnReact.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    [Microsoft.AspNetCore.Authorization.Authorize]
     public class RulesController : ControllerBase
     {
         private readonly TestContext _context;

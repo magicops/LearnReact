@@ -11,7 +11,14 @@ export const labels = {
     saveFaild: 'Saving process has been faild.',
     loadFaild: 'Loading process has been faild.',
     resetForm: 'New Entry',
-    saveSuccessful: 'Inspection has been saved sucessfully.'
+    saveSuccessful: 'Inspection has been saved sucessfully.',
+    username: 'Username',
+    usernameIsRequired: 'Username is required',
+    password: 'Password',
+    passwordIsRequired: 'Password is required',
+    login: 'Login',
+    inspectionForm: 'Inspection Form',
+    logout: 'Logout'
 };
 
 export const Lists = {

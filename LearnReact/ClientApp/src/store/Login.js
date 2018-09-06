@@ -1,9 +1,10 @@
-﻿import { createBrowserHistory } from 'history';
+﻿import * as Auth from '../helpers/Auth';
 
-const loading = 'HOME_LOADING';
-const loginFailed = 'HOME_LOGINFAILED';
-const changeField = 'HOME_CHANGEFIELD';
-const submit = 'HOME_SUBMIT';
+const loading = 'LOGIN_LOADING';
+const loginFailed = 'LOGIN_LOGINFAILED';
+const changeField = 'LOGIN_CHANGEFIELD';
+const submit = 'LOGIN_SUBMIT';
+const loggedIn = 'LOGIN_LOGGEDIN';
 
 const initialState = {
     loading: false,
@@ -15,7 +16,7 @@ const initialState = {
 
 export const actionCreators = {
     login: (username, password) => async (dispatch) => {
-
+        
         dispatch({ type: submit });
 
         if (username === '' || password === '')
@@ -38,9 +39,9 @@ export const actionCreators = {
 
         const token = await response.json();
 
-        localStorage.setItem('user', token.token);
-        //createBrowserHistory().push('/form');
-        window.location.href = '/form';
+        Auth.login(token.token);
+        
+        dispatch({ type: loggedIn });
     },
     changeField: (name, value) => ({ type: changeField, name, value })
 };
@@ -69,6 +70,10 @@ export const reducer = (state, action) => {
             ...state,
             [action.name]: action.value
         };
+    }
+
+    if (action.type === loggedIn) {
+        return { ...initialState };
     }
 
     return state;

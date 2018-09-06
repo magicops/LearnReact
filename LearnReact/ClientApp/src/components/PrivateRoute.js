@@ -1,10 +1,11 @@
 ﻿import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
+import * as Auth from '../helpers/Auth';
 
 export const PrivateRoute = ({ component: Component, ...rest }) => (
     <Route {...rest} render={props => (
-        localStorage.getItem('user')
+        Auth.userIsAuthenticated()
             ? <Component {...props} />
-            : <Redirect to={{ pathname: '/form', state: { from: props.location } }} />
+            : <Redirect to={{ pathname: '/', state: { from: props.location } }} />
     )} />
 )
