@@ -19,8 +19,6 @@ class Login extends Component {
     async handleSubmit(e) {
         e.preventDefault();
 
-        console.log('submit form');
-
         const { username, password } = this.props;
         this.props.login(username, password);
     }

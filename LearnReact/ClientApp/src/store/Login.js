@@ -39,7 +39,7 @@ export const actionCreators = {
 
         const token = await response.json();
 
-        Auth.login(token.token);
+        Auth.login(token);
         
         dispatch({ type: loggedIn });
     },

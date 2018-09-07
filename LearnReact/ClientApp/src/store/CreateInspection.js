@@ -25,17 +25,27 @@ const initialState = {
     selectedItems: {}
 };
 
-const fetchOptions = {
-    headers: {
-        'Authorization': `Bearer ${Auth.getToken()}`,
-        'Content-Type': 'application/json'
-    }
-};
-
 export const actionCreators = {
     showLoading: () => ({ type: loading }),
     hideLoading: () => ({ type: hideLoading }),
-    sliderNext: () => ({ type: sliderNext }),
+    sliderNext: () => (dispatch, getState) => {
+        const { step, selectedItems } = getState().createInspection;
+
+        let listTitle = '';
+        switch (step) {
+            case 1: listTitle = Lists.departments; break;
+            case 2: listTitle = Lists.rules; break;
+            case 3: listTitle = Lists.procedures; break;
+            default: listTitle = Lists.actions; break;
+        }
+
+        if (!selectedItems[listTitle]) {
+            dispatch({ type: error, message: labels.select__List.replace('__', listTitle) });
+            return;
+        }
+
+        dispatch({ type: sliderNext });
+    },
     sliderPrev: () => ({ type: sliderPrev }),
     reset: () => ({ type: reset }),
     dismissError: () => ({ type: dismissError }),
@@ -46,10 +56,10 @@ export const actionCreators = {
         dispatch({ type: loading });
 
         const promises = {
-            rules: await fetch("api/Rules", fetchOptions),
-            departments: await fetch("api/Departments", fetchOptions),
-            actions: await fetch('api/Actions', fetchOptions),
-            procedures: await fetch('api/Procedures', fetchOptions)
+            rules: await Auth.getFetch("api/Rules"),
+            departments: await Auth.getFetch("api/Departments"),
+            actions: await Auth.getFetch('api/Actions'),
+            procedures: await Auth.getFetch('api/Procedures')
         };
 
         if (!promises.rules.ok ||
@@ -104,9 +114,8 @@ export const actionCreators = {
             procedureId: selectedItems[Lists.procedures],
         };
         
-        const promise = await fetch('api/Inspections',
+        const promise = await Auth.getFetch('api/Inspections',
             {
-                ...fetchOptions,
                 method: 'POST',
                 body: JSON.stringify(inspection)
             });
@@ -145,7 +154,8 @@ export const reducer = (state, action) => {
     if (action.type === sliderNext) {
         return {
             ...state,
-            step: state.step + 1
+            step: state.step + 1,
+            error: null
         };
     }
 
@@ -168,8 +178,7 @@ export const reducer = (state, action) => {
 
     if (action.type === loaded) {
         return {
-            ...state,
-            loading: false,
+            ...initialState,
             rules: action.rules,
             departments: action.departments,
             actions: action.actions,
