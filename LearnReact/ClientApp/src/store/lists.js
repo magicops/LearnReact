@@ -1,12 +1,13 @@
-﻿import { Lists, labels } from "../constants";
+import { Lists, labels } from "../constants";
 import * as Auth from '../helpers/Auth';
 
-const loading = 'CI_LOADING';
-const loaded = 'CI_LOADED';
-const hideLoading = 'CI_HIDELOADING';
-const saved = 'CI_SAVED';
-const reset = 'CI_RESET';
-const error = 'CI_ERROR';
+const loading = 'LISTS_LOADING';
+const loaded = 'LISTS_LOADED';
+const hideLoading = 'LISTS_HIDELOADING';
+const saved = 'LISTS_SAVED';
+const reset = 'LISTS_RESET';
+const error = 'LISTS_ERROR';
+
 const sliderNext = 'SLIDER_NEXT';
 const sliderPrev = 'SLIDER_PREV';
 const selectItem = 'SLIDER_SELECTITEM';
@@ -14,12 +15,14 @@ const dismissError = 'SLIDER_DISMISSERROR';
 
 const initialState = {
     loading: false,
+    error: null,
+    loaded: false,
     rules: [],
     actions: [],
     procedures: [],
     departments: [],
+
     selectedDate: null,
-    error: null,
     saved: false,
     step: 1,
     selectedItems: {}
@@ -29,7 +32,7 @@ export const actionCreators = {
     showLoading: () => ({ type: loading }),
     hideLoading: () => ({ type: hideLoading }),
     sliderNext: () => (dispatch, getState) => {
-        const { step, selectedItems } = getState().createInspection;
+        const { step, selectedItems } = getState().lists;
 
         let listTitle = '';
         switch (step) {
@@ -51,7 +54,10 @@ export const actionCreators = {
     dismissError: () => ({ type: dismissError }),
 
     selectItem: (list, id) => ({ type: selectItem, list, id }),
-    loadAll: () => async (dispatch) => {
+    loadAll: () => async (dispatch, getState) => {
+
+        if (getState().lists.loaded)
+            return;
 
         dispatch({ type: loading });
 
@@ -113,7 +119,7 @@ export const actionCreators = {
             actionId: selectedItems[Lists.actions],
             procedureId: selectedItems[Lists.procedures],
         };
-        
+
         const promise = await Auth.getFetch('api/Inspections',
             {
                 method: 'POST',
@@ -182,7 +188,8 @@ export const reducer = (state, action) => {
             rules: action.rules,
             departments: action.departments,
             actions: action.actions,
-            procedures: action.procedures
+            procedures: action.procedures,
+            loaded: true
         };
     }
 
@@ -216,7 +223,8 @@ export const reducer = (state, action) => {
             rules: state.rules,
             actions: state.actions,
             departments: state.departments,
-            procedures: state.procedures
+            procedures: state.procedures,
+            loaded: true
         };
     }
 

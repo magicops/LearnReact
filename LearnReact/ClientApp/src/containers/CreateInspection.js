@@ -2,9 +2,9 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Button, Well } from 'react-bootstrap';
-import { actionCreators } from '../store/CreateInspection';
-import Slider from './Slider';
-import { PulseLoader } from 'react-spinners';
+import { actionCreators } from '../store/lists';
+import Slider from '../components/Slider';
+import Loading from '../components/Loading';
 import { Lists, labels } from '../constants';
 
 class CreateInspection extends Component {
@@ -35,13 +35,7 @@ class CreateInspection extends Component {
         let output = "";
 
         if (this.props.loading)
-            output = <PulseLoader
-                className="loading"
-                size={15}
-                margin="5px"
-                color={'rgba(255,255,255,0.7)'}
-                loading={this.props.loading}
-            />;
+            output = <Loading loading={this.props.loading} />;
         else if (this.props.saved)
             output = <div className="success-result">
                 <Well bsStyle="success">{labels.saveSuccessful}</Well>
@@ -68,6 +62,6 @@ class CreateInspection extends Component {
 }
 
 export default connect(
-    state => state.createInspection,
+    state => state.lists,
     dispatch => bindActionCreators(actionCreators, dispatch)
 )(CreateInspection);

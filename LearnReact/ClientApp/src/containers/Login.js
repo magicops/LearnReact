@@ -6,7 +6,7 @@ import { Alert, FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { actionCreators } from '../store/Login';
 import * as Auth from '../helpers/Auth';
-import { PulseLoader } from 'react-spinners';
+import Loading from '../components/Loading';
 
 
 class Login extends Component {
@@ -56,10 +56,9 @@ class Login extends Component {
                             disabled={loading}
                             onClick={loading ? (e) => { e.stopPropagation(); e.preventDefault(); return false; } : null}>
                             {loading ?
-                                <PulseLoader
+                                <Loading
                                     size={5}
                                     margin="2px"
-                                    color={'rgba(255,255,255,0.7)'}
                                     loading={loading}
                                 />
                                 : labels.login}

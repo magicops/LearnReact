@@ -18,7 +18,8 @@ export const labels = {
     passwordIsRequired: 'Password is required',
     login: 'Login',
     inspectionForm: 'Inspection Form',
-    logout: 'Logout'
+    logout: 'Logout',
+    baseData: 'Base Data'
 };
 
 export const Lists = {

@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { Glyphicon, Nav, Navbar, NavItem } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { labels } from '../constants';
-import './NavMenu.css';
 import * as Auth from '../helpers/Auth';
 
 export default props => {
@@ -11,8 +10,7 @@ export default props => {
         i = 0;
 
     if (Auth.userIsAuthenticated()) {
-        links.push(<LinkContainer key={++i} to={'/counter'}><NavItem><Glyphicon glyph='education' /> Counter</NavItem></LinkContainer>);
-        links.push(<LinkContainer key={++i} to={'/fetchdata'}><NavItem><Glyphicon glyph='th-list' /> Fetch data</NavItem></LinkContainer>);
+        links.push(<LinkContainer key={++i} to={'/baseData'}><NavItem><Glyphicon glyph='tasks' /> {labels.baseData}</NavItem></LinkContainer>);
         links.push(<LinkContainer key={++i} to={'/form'}><NavItem><Glyphicon glyph='th-list' /> {labels.inspectionForm}</NavItem></LinkContainer>);
         links.push(<LinkContainer key={++i} to={'/logout'}><NavItem><Glyphicon glyph='log-out' /> {labels.logout}</NavItem></LinkContainer>);
     }

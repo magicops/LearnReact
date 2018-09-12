@@ -1,0 +1,224 @@
+$blue: #64b3eb;
+$blue-darker: #479fdd;
+$blue-darkest: #3594d7;
+
+html {
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+    height: 100%;
+
+    body {
+        background-color: $blue;
+        width: 100%;
+        height: 100%;
+
+        .navbar {
+            li .glyphicon {
+                margin-right: 10px;
+            }
+
+            .navbar-nav .active a {
+                background-image: none;
+                background-color: $blue;
+                color: white;
+
+                &:hover, &:focus {
+                    background-image: none;
+                    background-color: $blue;
+                    color: white;
+                }
+            }
+        }
+
+        .loading {
+            width: 75px;
+            margin: 0px auto;
+            padding-top: 100px;
+        }
+
+        .success-result {
+            padding: 10px;
+            text-align: center;
+        }
+
+        .myButton {
+            cursor: pointer !important;
+            color: white !important;
+            background-color: $blue-darker !important;
+            text-decoration: none !important;
+
+            &:focus, &:hover {
+                background-color: $blue-darkest !important;
+            }
+        }
+
+        #root, .full-height, .create-inspection {
+            height: 100%;
+        }
+
+        .clearfix {
+            clear: both;
+        }
+    }
+}
+
+.slider {
+    width: 100%;
+    height: 100%;
+    position: relative;
+
+    .floating-alert {
+        position: absolute;
+        margin: 10px auto;
+        z-index: 1050;
+        right: 10px;
+    }
+
+    .slider-wrapper {
+        width: 100%;
+        height: calc(100% - 60px);
+        position: relative;
+        overflow-x: hidden;
+
+        & > div.step {
+            float: right;
+            width: 100%;
+            height: 100%;
+
+            & > h3 {
+                margin: auto;
+                padding: 10px;
+                width: 100%;
+                text-align: center;
+                display: block;
+            }
+
+            & > ul {
+                margin: 0px;
+                padding: 0px;
+                width: 100%;
+                height: calc(100% - 50px);
+                overflow-y: auto;
+
+                > li {
+                    list-style: none;
+                    margin: 0px;
+                    padding: 10px;
+                    width: 100%;
+                    color: white;
+                    cursor: pointer;
+                    text-align: center;
+
+                    &:hover {
+                        background-color: #1a6da9;
+                    }
+
+                    &.selected {
+                        background-color: #17517c;
+                    }
+                }
+            }
+        }
+
+        .step {
+            float: right;
+            position: absolute;
+        }
+
+        .step-enter {
+            /*transform: translateX(-100%);*/
+            opacity: 0.01;
+        }
+
+        .step-enter-active {
+            /*transform: translateX(0%);*/
+            transition: all 1000ms ease-out;
+            opacity: 1;
+        }
+
+        .step-exit {
+            /*transform: translateX(0%);*/
+            opacity: 1;
+        }
+
+        .step-exit-active {
+            /*transform: translateX(200%);*/
+            /*transition: all 500ms ease-in;*/
+            opacity: 0.01;
+        }
+    }
+
+    .footer {
+        padding-top: 10px;
+
+        .btn-slide {
+            margin-top: -10px;
+            color: #fff;
+            font-size: xx-large;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    /* On small screens, the nav menu spans the full width of the screen. Leave a space for it. */
+    body {
+        padding-top: 50px;
+    }
+}
+
+/* Highlighting rules for nav menu items */
+@media (min-width: 768px) {
+
+    /* On large screens, convert the nav menu to a vertical sidebar */
+    .navbar {
+        height: 100%;
+        width: calc(25% - 20px);
+        border-radius: 0;
+        border-width: 0;
+        height: 100%;
+    }
+
+    .navbar-header {
+        float: none;
+    }
+
+    .navbar {
+        .navbar-collapse {
+            border-top: 1px solid #444;
+            padding: 0;
+        }
+
+        .container-fluid {
+            padding: 0;
+            margin: 0;
+
+            .navbar-brand {
+                margin: 0;
+            }
+        }
+
+        ul {
+            float: none;
+        }
+
+        li {
+            float: none;
+            font-size: 15px;
+            margin: 6px;
+
+            a {
+                padding: 10px 16px;
+                border-radius: 4px;
+            }
+        }
+
+        a {
+            /* If a menu item's text is too long, truncate it */
+            width: 100%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    }
+}
