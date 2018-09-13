@@ -2,6 +2,7 @@ import React from 'react';
 import { Glyphicon, Button, Alert } from 'react-bootstrap';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { labels } from '../constants';
+import Notification from './Notification';
 
 const Slider = props => {
 
@@ -52,9 +53,7 @@ const Slider = props => {
     };
 
     return <div className="slider">
-        {props.error &&
-            <Alert bsStyle="danger" className="floating-alert" onDismiss={() => { props.onDismissError() }}>{props.error}</Alert>
-        }
+        <Notification message={props.error} onDismiss={() => props.onDismissError() } />
 
         <TransitionGroup className="slider-wrapper">
             {

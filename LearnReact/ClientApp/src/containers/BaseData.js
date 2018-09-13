@@ -2,6 +2,7 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { actionCreators } from '../store/lists';
+import Notification from '../components/Notification';
 
 class BaseData extends Component {
 
@@ -11,7 +12,10 @@ class BaseData extends Component {
 
     render() {
 
-        return <div className="base-data">BaseData
+        return <div className="base-data">
+
+            <Notification message={this.props.error} onDismiss={() => this.props.onDismissError()} />
+            BaseData
         </div>;
     }
 }

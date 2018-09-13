@@ -37,9 +37,11 @@ html {
             padding-top: 100px;
         }
 
-        .success-result {
-            padding: 10px;
-            text-align: center;
+        .notification {
+            position: absolute;
+            margin: 10px auto;
+            z-index: 1050;
+            right: 10px;
         }
 
         .myButton {
@@ -60,102 +62,104 @@ html {
         .clearfix {
             clear: both;
         }
-    }
-}
 
-.slider {
-    width: 100%;
-    height: 100%;
-    position: relative;
+        .create-inspection {
 
-    .floating-alert {
-        position: absolute;
-        margin: 10px auto;
-        z-index: 1050;
-        right: 10px;
-    }
 
-    .slider-wrapper {
-        width: 100%;
-        height: calc(100% - 60px);
-        position: relative;
-        overflow-x: hidden;
-
-        & > div.step {
-            float: right;
-            width: 100%;
-            height: 100%;
-
-            & > h3 {
-                margin: auto;
+            .success-result {
                 padding: 10px;
-                width: 100%;
                 text-align: center;
-                display: block;
             }
 
-            & > ul {
-                margin: 0px;
-                padding: 0px;
+            .slider {
                 width: 100%;
-                height: calc(100% - 50px);
-                overflow-y: auto;
+                height: 100%;
+                position: relative;
 
-                > li {
-                    list-style: none;
-                    margin: 0px;
-                    padding: 10px;
+                .slider-wrapper {
                     width: 100%;
-                    color: white;
-                    cursor: pointer;
-                    text-align: center;
+                    height: calc(100% - 60px);
+                    position: relative;
+                    overflow-x: hidden;
 
-                    &:hover {
-                        background-color: #1a6da9;
+                    & > div.step {
+                        float: right;
+                        width: 100%;
+                        height: 100%;
+
+                        & > h3 {
+                            margin: auto;
+                            padding: 10px;
+                            width: 100%;
+                            text-align: center;
+                            display: block;
+                        }
+
+                        & > ul {
+                            margin: 0px;
+                            padding: 0px;
+                            width: 100%;
+                            height: calc(100% - 50px);
+                            overflow-y: auto;
+
+                            > li {
+                                list-style: none;
+                                margin: 0px;
+                                padding: 10px;
+                                width: 100%;
+                                color: white;
+                                cursor: pointer;
+                                text-align: center;
+
+                                &:hover {
+                                    background-color: #1a6da9;
+                                }
+
+                                &.selected {
+                                    background-color: #17517c;
+                                }
+                            }
+                        }
                     }
 
-                    &.selected {
-                        background-color: #17517c;
+                    .step {
+                        float: right;
+                        position: absolute;
+                    }
+
+                    .step-enter {
+                        /*transform: translateX(-100%);*/
+                        opacity: 0.01;
+                    }
+
+                    .step-enter-active {
+                        /*transform: translateX(0%);*/
+                        transition: all 1000ms ease-out;
+                        opacity: 1;
+                    }
+
+                    .step-exit {
+                        /*transform: translateX(0%);*/
+                        opacity: 1;
+                    }
+
+                    .step-exit-active {
+                        /*transform: translateX(200%);*/
+                        /*transition: all 500ms ease-in;*/
+                        opacity: 0.01;
+                    }
+                }
+
+                .footer {
+                    padding-top: 10px;
+
+                    .btn-slide {
+                        margin-top: -10px;
+                        color: #fff;
+                        font-size: xx-large;
                     }
                 }
             }
-        }
-
-        .step {
-            float: right;
-            position: absolute;
-        }
-
-        .step-enter {
-            /*transform: translateX(-100%);*/
-            opacity: 0.01;
-        }
-
-        .step-enter-active {
-            /*transform: translateX(0%);*/
-            transition: all 1000ms ease-out;
-            opacity: 1;
-        }
-
-        .step-exit {
-            /*transform: translateX(0%);*/
-            opacity: 1;
-        }
-
-        .step-exit-active {
-            /*transform: translateX(200%);*/
-            /*transition: all 500ms ease-in;*/
-            opacity: 0.01;
-        }
-    }
-
-    .footer {
-        padding-top: 10px;
-
-        .btn-slide {
-            margin-top: -10px;
-            color: #fff;
-            font-size: xx-large;
         }
     }
 }
