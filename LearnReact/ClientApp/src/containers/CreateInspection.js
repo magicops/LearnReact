@@ -13,30 +13,12 @@ class CreateInspection extends Component {
     }
 
     render() {
-        const lists = [
-            {
-                title: Lists.departments,
-                items: this.props.departments
-            },
-            {
-                title: Lists.rules,
-                items: this.props.rules
-            },
-            {
-                title: Lists.procedures,
-                items: this.props.procedures
-            },
-            {
-                title: Lists.actions,
-                items: this.props.actions
-            }
-        ];
+        if (this.props.loading)
+            return <Loading loading={this.props.loading} />;
 
         let output = "";
 
-        if (this.props.loading)
-            output = <Loading loading={this.props.loading} />;
-        else if (this.props.saved)
+        if (this.props.saved)
             output = <div className="success-result">
                 <Well bsStyle="success">{labels.saveSuccessful}</Well>
                 <Button
@@ -44,7 +26,27 @@ class CreateInspection extends Component {
                     className="myButton"
                     onClick={() => { this.props.reset() }}>{labels.resetForm}</Button>
             </div>;
-        else
+        else {
+
+            const lists = [
+                {
+                    title: Lists.departments,
+                    items: this.props.departments
+                },
+                {
+                    title: Lists.rules,
+                    items: this.props.rules
+                },
+                {
+                    title: Lists.procedures,
+                    items: this.props.procedures
+                },
+                {
+                    title: Lists.actions,
+                    items: this.props.actions
+                }
+            ];
+
             output = <Slider
                 step={this.props.step}
                 selectedItems={this.props.selectedItems}
@@ -56,6 +58,7 @@ class CreateInspection extends Component {
                 onPrev={() => this.props.sliderPrev()}
                 onDismissError={() => { this.props.dismissError() }}
             />;
+        }
 
         return <div className="create-inspection">{output}</div>;
     }

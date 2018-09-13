@@ -100,6 +100,8 @@
           margin-top: -10px;
           color: #fff;
           font-size: xx-large; }
+    html body .base-data {
+      padding-top: 10px; }
 
 @media (max-width: 768px) {
   /* On small screens, the nav menu spans the full width of the screen. Leave a space for it. */

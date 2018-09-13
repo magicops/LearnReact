@@ -1,5 +1,5 @@
 import React from 'react';
-import { Glyphicon, Button, Alert } from 'react-bootstrap';
+import { Glyphicon, Button } from 'react-bootstrap';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { labels } from '../constants';
 import Notification from './Notification';

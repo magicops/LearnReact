@@ -13,6 +13,8 @@ const sliderPrev = 'SLIDER_PREV';
 const selectItem = 'SLIDER_SELECTITEM';
 const dismissError = 'SLIDER_DISMISSERROR';
 
+const BASEDATA_CHANGE_SELCTED_LIST = 'BASEDATA_CHANGE_SELCTED_LIST';
+
 const initialState = {
     loading: false,
     error: null,
@@ -23,6 +25,7 @@ const initialState = {
     departments: [],
 
     selectedDate: null,
+    selectedList: Lists.departments,
     saved: false,
     step: 1,
     selectedItems: {}
@@ -137,7 +140,9 @@ export const actionCreators = {
 
         await promise.json();
         dispatch({ type: saved });
-    }
+    },
+
+    changeSelectedList: (list) => ({ type: BASEDATA_CHANGE_SELCTED_LIST, list })
 };
 
 export const reducer = (state, action) => {
@@ -225,6 +230,13 @@ export const reducer = (state, action) => {
             departments: state.departments,
             procedures: state.procedures,
             loaded: true
+        };
+    }
+
+    if (action.type === BASEDATA_CHANGE_SELCTED_LIST) {
+        return {
+            ...state,
+            selectedList: action.list
         };
     }
 

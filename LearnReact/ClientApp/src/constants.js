@@ -19,7 +19,8 @@ export const labels = {
     login: 'Login',
     inspectionForm: 'Inspection Form',
     logout: 'Logout',
-    baseData: 'Base Data'
+    baseData: 'Base Data',
+    selectAList: 'Select a List'
 };
 
 export const Lists = {
