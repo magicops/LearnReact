@@ -32,9 +32,6 @@ class Login extends Component {
         return (
             <div className="col-md-6 col-md-offset-3">
                 <h2>Login</h2>
-                {error &&
-                    <Alert bsStyle="danger">{error}</Alert>
-                }
                 <form name="form" onSubmit={(e) => this.handleSubmit(e)}>
                     <FormGroup className={submitted && !username ? ' has-error' : ''}>
                         <ControlLabel htmlFor="username">{labels.username}</ControlLabel>
@@ -52,19 +49,24 @@ class Login extends Component {
                     </FormGroup>
                     <FormGroup>
                         <button
-                            className="myButton btn btn-link"
+                            className="btn btn-primary"
                             disabled={loading}
                             onClick={loading ? (e) => { e.stopPropagation(); e.preventDefault(); return false; } : null}>
                             {loading ?
                                 <Loading
+                                    noClass="true"
                                     size={5}
                                     margin="2px"
                                     loading={loading}
+                                    color="rgba(255,255,255,0.7)"
                                 />
                                 : labels.login}
                         </button>
                     </FormGroup>
                 </form>
+                {error &&
+                    <Alert bsStyle="danger">{error}</Alert>
+                }
             </div>
         );
     }

@@ -1,8 +1,8 @@
 ﻿import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Button, Well } from 'react-bootstrap';
-import { actionCreators } from '../store/lists';
+import { Button, Alert } from 'react-bootstrap';
+import { actionCreators } from '../store/Lists/actionCreators';
 import Slider from '../components/Slider';
 import Loading from '../components/Loading';
 import { Lists, labels } from '../constants';
@@ -20,10 +20,9 @@ class CreateInspection extends Component {
 
         if (this.props.saved)
             output = <div className="success-result">
-                <Well bsStyle="success">{labels.saveSuccessful}</Well>
+                <Alert bsStyle="success">{labels.saveSuccessful}</Alert>
                 <Button
-                    bsStyle="link"
-                    className="myButton"
+                    bsStyle="primary"
                     onClick={() => { this.props.reset() }}>{labels.resetForm}</Button>
             </div>;
         else {

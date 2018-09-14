@@ -1,10 +1,10 @@
 ﻿import * as Auth from '../helpers/Auth';
 
-const loading = 'LOGIN_LOADING';
-const loginFailed = 'LOGIN_LOGINFAILED';
-const changeField = 'LOGIN_CHANGEFIELD';
-const submit = 'LOGIN_SUBMIT';
-const loggedIn = 'LOGIN_LOGGEDIN';
+const LOGIN_LOADING = 'LOGIN_LOADING';
+const LOGIN_LOGIN_FAILED = 'LOGIN_LOGIN_FAILED';
+const LOGIN_CHANGE_FIELD = 'LOGIN_CHANGE_FIELD';
+const LOGIN_SUBMIT = 'LOGIN_SUBMIT';
+const LOGIN_LOGGEDIN = 'LOGIN_LOGGEDIN';
 
 const initialState = {
     loading: false,
@@ -17,12 +17,12 @@ const initialState = {
 export const actionCreators = {
     login: (username, password) => async (dispatch) => {
         
-        dispatch({ type: submit });
+        dispatch({ type: LOGIN_SUBMIT });
 
         if (username === '' || password === '')
             return;
 
-        dispatch({ type: loading });
+        dispatch({ type: LOGIN_LOADING });
 
         const response = await fetch("api/Auth/Login", {
             method: 'POST',
@@ -33,7 +33,7 @@ export const actionCreators = {
         });
 
         if (!response.ok) {
-            dispatch({ type: loginFailed, message: "Login failed." });
+            dispatch({ type: LOGIN_LOGIN_FAILED, message: "Login failed." });
             return;
         }
 
@@ -41,23 +41,23 @@ export const actionCreators = {
 
         Auth.login(token);
         
-        dispatch({ type: loggedIn });
+        dispatch({ type: LOGIN_LOGGEDIN });
     },
-    changeField: (name, value) => ({ type: changeField, name, value })
+    changeField: (name, value) => ({ type: LOGIN_CHANGE_FIELD, name, value })
 };
 
 export const reducer = (state, action) => {
     state = state || initialState;
 
-    if (action.type === loading) {
+    if (action.type === LOGIN_LOADING) {
         return { ...state, loading: true };
     }
 
-    if (action.type === submit) {
+    if (action.type === LOGIN_SUBMIT) {
         return { ...state, submitted: true };
     }
 
-    if (action.type === loginFailed) {
+    if (action.type === LOGIN_LOGIN_FAILED) {
         return {
             ...state,
             loading: false,
@@ -65,14 +65,14 @@ export const reducer = (state, action) => {
         };
     }
 
-    if (action.type === changeField) {
+    if (action.type === LOGIN_CHANGE_FIELD) {
         return {
             ...state,
             [action.name]: action.value
         };
     }
 
-    if (action.type === loggedIn) {
+    if (action.type === LOGIN_LOGGEDIN) {
         return { ...initialState };
     }
 

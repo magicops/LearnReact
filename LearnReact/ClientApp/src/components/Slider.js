@@ -1,5 +1,5 @@
 import React from 'react';
-import { Glyphicon, Button } from 'react-bootstrap';
+import { Glyphicon, Button, ListGroup, ListGroupItem } from 'react-bootstrap';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { labels } from '../constants';
 import Notification from './Notification';
@@ -29,7 +29,7 @@ const Slider = props => {
 
     const saveButton = <Button
         bsStyle="link"
-        className="pull-left myButton"
+        className="pull-left"
         onClick={(e) => save(e)}>
         {labels.save}
     </Button>;
@@ -37,23 +37,22 @@ const Slider = props => {
     const generateSlide = (list) => {
         return <div className="step">
             <h3>{list.title}</h3>
-            <ul>
+            <ListGroup>
                 {
                     list.items.map(item =>
-                        <li
-                            className={props.selectedItems[list.title] === item.id ? "selected" : ""}
+                        <ListGroupItem
+                            active={props.selectedItems[list.title] === item.id}
                             onClick={() => props.onSelectItem(list.title, item.id)}
-                            key={item.id}
-                            data-id={item.id}>
+                            key={item.id}>
                             {item.title}
-                        </li>)
+                        </ListGroupItem>)
                 }
-            </ul>
+            </ListGroup>
         </div>;
     };
 
     return <div className="slider">
-        <Notification message={props.error} onDismiss={() => props.onDismissError() } />
+        <Notification message={props.error} onDismiss={() => props.onDismissError()} />
 
         <TransitionGroup className="slider-wrapper">
             {

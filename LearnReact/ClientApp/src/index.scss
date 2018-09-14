@@ -1,6 +1,4 @@
-$blue: #64b3eb;
-$blue-darker: #479fdd;
-$blue-darkest: #3594d7;
+$bs-danger: #f2dede;
 
 html {
     margin: 0px;
@@ -9,7 +7,6 @@ html {
     height: 100%;
 
     body {
-        background-color: $blue;
         width: 100%;
         height: 100%;
 
@@ -20,15 +17,17 @@ html {
 
             .navbar-nav .active a {
                 background-image: none;
-                background-color: $blue;
                 color: white;
 
                 &:hover, &:focus {
                     background-image: none;
-                    background-color: $blue;
                     color: white;
                 }
             }
+        }
+
+        .modal-header-danger {
+            background-color: $bs-danger;
         }
 
         .loading {
@@ -44,23 +43,22 @@ html {
             right: 10px;
         }
 
-        .myButton {
-            cursor: pointer !important;
-            color: white !important;
-            background-color: $blue-darker !important;
-            text-decoration: none !important;
-
-            &:focus, &:hover {
-                background-color: $blue-darkest !important;
-            }
-        }
-
         #root, .full-height, .create-inspection {
             height: 100%;
         }
 
         .clearfix {
             clear: both;
+        }
+
+        .btn-circle {
+            width: 30px;
+            height: 30px;
+            text-align: center;
+            padding: 6px 0;
+            font-size: 12px;
+            line-height: 1.428571429;
+            border-radius: 15px;
         }
 
         .create-inspection {
@@ -94,30 +92,10 @@ html {
                             display: block;
                         }
 
-                        & > ul {
-                            margin: 0px;
-                            padding: 0px;
-                            width: 100%;
+                        & > .list-group {
                             height: calc(100% - 50px);
                             overflow-y: auto;
-
-                            > li {
-                                list-style: none;
-                                margin: 0px;
-                                padding: 10px;
-                                width: 100%;
-                                color: white;
-                                cursor: pointer;
-                                text-align: center;
-
-                                &:hover {
-                                    background-color: #1a6da9;
-                                }
-
-                                &.selected {
-                                    background-color: #17517c;
-                                }
-                            }
+                            margin-bottom: 0px;
                         }
                     }
 
@@ -154,7 +132,6 @@ html {
 
                     .btn-slide {
                         margin-top: -10px;
-                        color: #fff;
                         font-size: xx-large;
                     }
                 }
@@ -163,6 +140,20 @@ html {
 
         .base-data {
             padding-top: 10px;
+
+            .add-item {
+                float: right;
+                cursor: pointer;
+                background-color: #909090;
+                color: white;
+            }
+
+            .list-command {
+                background-color: #909090;
+                color: white;
+                margin-left: 2px;
+                cursor: pointer;
+            }
         }
     }
 }
