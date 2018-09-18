@@ -5,14 +5,25 @@ import actionTypes from './actionTypes';
 export const actionCreators = {
     showLoading: () => ({ type: actionTypes.LISTS_LOADING }),
     hideLoading: () => ({ type: actionTypes.LISTS_HIDE_LOADING }),
+    dismissError: () => ({ type: actionTypes.LISTS_DISMISS_ERROR }),
+
+    //createInspectioon
     sliderNext: () => (dispatch, getState) => {
-        const { step, selectedItems } = getState().lists;
+        const { step, selectedItems, selectedDate } = getState().lists;
 
         let listTitle = '';
         switch (step) {
-            case 1: listTitle = Lists.departments; break;
-            case 2: listTitle = Lists.rules; break;
-            case 3: listTitle = Lists.procedures; break;
+            case 1:
+                if (!selectedDate) {
+                    dispatch({ type: actionTypes.LISTS_ERROR, message: labels.selectADate });
+                    return;
+                }
+
+                dispatch({ type: actionTypes.SLIDER_NEXT });
+                return;
+            case 2: listTitle = Lists.departments; break;
+            case 3: listTitle = Lists.rules; break;
+            case 4: listTitle = Lists.procedures; break;
             default: listTitle = Lists.actions; break;
         }
 
@@ -25,9 +36,8 @@ export const actionCreators = {
     },
     sliderPrev: () => ({ type: actionTypes.SLIDER_PREV }),
     reset: () => ({ type: actionTypes.SLIDER_RESET }),
-    dismissError: () => ({ type: actionTypes.LISTS_DISMISS_ERROR }),
-
     selectItem: (list, id) => ({ type: actionTypes.SLIDER_SELECTITEM, list, id }),
+    sliderSelectDate: (date) => ({ type: actionTypes.SLIDER_SELECT_DATE, date }),
     loadAll: () => async (dispatch, getState) => {
 
         if (getState().lists.loaded)
@@ -66,7 +76,7 @@ export const actionCreators = {
             procedures: results.procedures
         });
     },
-    save: (lists, selectedItems) => async (dispatch) => {
+    save: (lists, selectedItems, selectedDate) => async (dispatch) => {
 
         let isValid = true,
             emptyListTitle = '';
@@ -87,7 +97,7 @@ export const actionCreators = {
         dispatch({ type: actionTypes.LISTS_LOADING });
 
         const inspection = {
-            date: new Date().toJSON(),
+            date: selectedDate,
             departmentId: selectedItems[Lists.departments],
             ruleId: selectedItems[Lists.rules],
             actionId: selectedItems[Lists.actions],
@@ -110,6 +120,7 @@ export const actionCreators = {
         dispatch({ type: actionTypes.SLIDER_SAVED });
     },
 
+    //baseData
     changeSelectedList: (list) => ({ type: actionTypes.BASEDATA_CHANGE_SELCTED_LIST, list }),
     hideModal: () => ({ type: actionTypes.BASEDATA_HIDE_MODAL }),
     addNewItem: () => ({ type: actionTypes.BASEDATA_ADD_NEW_ITEM }),
@@ -226,5 +237,8 @@ export const actionCreators = {
         }
 
         dispatch({ type: actionTypes.BASEDATA_DELETE_ITEM, id, selectedListName });
-    }
+    },
+
+    //inspections
+
 };

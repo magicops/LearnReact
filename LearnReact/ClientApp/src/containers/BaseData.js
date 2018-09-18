@@ -40,7 +40,7 @@ class BaseData extends Component {
     }
 
     render() {
-
+        
         let list = this.getSelectedList();
 
         if (this.props.loading)

@@ -6,6 +6,8 @@ import { actionCreators } from '../store/Lists/actionCreators';
 import Slider from '../components/Slider';
 import Loading from '../components/Loading';
 import { Lists, labels } from '../constants';
+import momentJalaali from 'moment-jalaali';
+import moment from 'moment';
 
 class CreateInspection extends Component {
     componentWillMount() {
@@ -47,14 +49,17 @@ class CreateInspection extends Component {
             ];
 
             output = <Slider
+                rtl={this.props.rtl}
                 step={this.props.step}
                 selectedItems={this.props.selectedItems}
+                selectedDate={this.props.selectedDate}
                 error={this.props.error}
                 lists={lists}
-                onSave={(lists, selectedItems) => this.props.save(lists, selectedItems)}
+                onSave={(lists, selectedItems) => this.props.save(lists, selectedItems, this.props.selectedDate)}
                 onSelectItem={(list, id) => this.props.selectItem(list, id)}
                 onNext={() => this.props.sliderNext()}
                 onPrev={() => this.props.sliderPrev()}
+                onDateChange={date => this.props.sliderSelectDate(date)}
                 onDismissError={() => { this.props.dismissError() }}
             />;
         }

@@ -2,6 +2,7 @@ import { Lists, labels } from "../../constants";
 import actionTypes from './actionTypes';
 
 const initialState = {
+    rtl: true,
     loading: false,
     error: null,
     loaded: false,
@@ -43,6 +44,33 @@ const reducer = (state, action) => {
         };
     }
 
+    if (action.type === actionTypes.LISTS_ERROR) {
+        return {
+            ...state,
+            loading: false,
+            error: action.message
+        };
+    }
+
+    if (action.type === actionTypes.LISTS_DISMISS_ERROR) {
+        return {
+            ...state,
+            error: null
+        };
+    }
+
+    if (action.type === actionTypes.LISTS_LOADED) {
+        return {
+            ...initialState,
+            rules: action.rules,
+            departments: action.departments,
+            actions: action.actions,
+            procedures: action.procedures,
+            loaded: true
+        };
+    }
+
+
     if (action.type === actionTypes.SLIDER_NEXT) {
         return {
             ...state,
@@ -68,37 +96,11 @@ const reducer = (state, action) => {
         };
     }
 
-    if (action.type === actionTypes.LISTS_LOADED) {
-        return {
-            ...initialState,
-            rules: action.rules,
-            departments: action.departments,
-            actions: action.actions,
-            procedures: action.procedures,
-            loaded: true
-        };
-    }
-
     if (action.type === actionTypes.SLIDER_SAVED) {
         return {
             ...state,
             loading: false,
             saved: true,
-            error: null
-        };
-    }
-
-    if (action.type === actionTypes.LISTS_ERROR) {
-        return {
-            ...state,
-            loading: false,
-            error: action.message
-        };
-    }
-
-    if (action.type === actionTypes.LISTS_DISMISS_ERROR) {
-        return {
-            ...state,
             error: null
         };
     }
@@ -113,6 +115,14 @@ const reducer = (state, action) => {
             loaded: true
         };
     }
+
+    if (action.type === actionTypes.SLIDER_SELECT_DATE) {
+        return {
+            ...state,
+            selectedDate: action.date
+        };
+    }
+
 
     if (action.type === actionTypes.BASEDATA_CHANGE_SELCTED_LIST) {
         return {

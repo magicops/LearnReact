@@ -28,7 +28,9 @@
     addNew__: 'Add new __',
     Edit__: 'Edit __',
     deleteModalTitle__: 'Delete __',
-    areYouSureToDelete: 'Are you sure to delete?'
+    areYouSureToDelete: 'Are you sure to delete?',
+    selectADate: 'Select a date',
+    selectDate: 'Select date'
 };
 
 export const Lists = {
