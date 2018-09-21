@@ -2,6 +2,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap-theme.css';
 import './index.css';
 import './fonts/font.css';
+import localization from './helpers/localization';
 //import './bootstrap-rtl.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -19,6 +20,9 @@ const history = createBrowserHistory({ basename: baseUrl });
 // Get the application-wide store instance, prepopulating with state from the server where available.
 const initialState = window.initialReduxState;
 const store = configureStore(history, initialState);
+
+if (localization.isRTL())
+    require('./bootstrap-rtl.css');
 
 const rootElement = document.getElementById('root');
 

@@ -4,6 +4,7 @@ import { Glyphicon, Nav, Navbar, NavItem } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { labels } from '../constants';
 import * as Auth from '../helpers/Auth';
+import localization from '../helpers/localization';
 
 export default props => {
     let links = [],
@@ -18,6 +19,9 @@ export default props => {
         links.push(<LinkContainer key={++i} to={'/'}><NavItem><Glyphicon glyph='user' /> {labels.login}</NavItem></LinkContainer>);
     }
 
+    links.splice(links.length - 1, 0, <LinkContainer to={'#'} key={++i} onClick={() => localization.switchLanguage() }>
+        <NavItem><Glyphicon glyph='user' /> {labels.lang}</NavItem>
+    </LinkContainer>);
 
     return (
         <Navbar inverse fixedTop fluid collapseOnSelect>

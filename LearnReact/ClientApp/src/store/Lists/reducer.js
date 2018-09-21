@@ -2,7 +2,6 @@ import { Lists, labels } from "../../constants";
 import actionTypes from './actionTypes';
 
 const initialState = {
-    rtl: true,
     loading: false,
     error: null,
     loaded: false,
@@ -107,11 +106,9 @@ const reducer = (state, action) => {
 
     if (action.type === actionTypes.SLIDER_RESET) {
         return {
-            ...initialState,
-            rules: state.rules,
-            actions: state.actions,
-            departments: state.departments,
-            procedures: state.procedures,
+            ...state,
+            saved: false,
+            step: 1,
             loaded: true
         };
     }
@@ -170,21 +167,21 @@ const reducer = (state, action) => {
         let selectedList = null;
         switch (action.selectedListName) {
             case Lists.departments:
-                selectedList = state.departments;
+                selectedList = state.departments.map(i => Object.assign({}, i));
                 selectedList.push({ id: action.id, title: action.title });
                 return {
                     ...state,
                     departments: selectedList
                 };
             case Lists.rules:
-                selectedList = state.rules;
+                selectedList = state.rules.map(i => Object.assign({}, i));
                 selectedList.push({ id: action.id, title: action.title });
                 return {
                     ...state,
                     rules: selectedList
                 };
             case Lists.procedures:
-                selectedList = state.procedures;
+                selectedList = state.procedures.map(i => Object.assign({}, i));
                 selectedList.push({ id: action.id, title: action.title });
                 return {
                     ...state,
@@ -192,7 +189,7 @@ const reducer = (state, action) => {
                 };
             case Lists.actions:
             default:
-                selectedList = state.actions;
+                selectedList = state.actions.map(i => Object.assign({}, i));
                 selectedList.push({ id: action.id, title: action.title });
                 return {
                     ...state,

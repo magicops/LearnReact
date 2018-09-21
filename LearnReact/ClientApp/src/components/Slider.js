@@ -3,6 +3,7 @@ import { Glyphicon, Button, ListGroup, ListGroupItem, FormGroup, ControlLabel } 
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { labels } from '../constants';
 import Notification from './Notification';
+import localization from '../helpers/localization';
 import DatePicker from 'react-datepicker2';
 import 'react-datepicker2/dist/react-datepicker2.min.css';
 //import moment from 'moment-jalaali';
@@ -11,13 +12,10 @@ class Slider extends React.Component {
     
     datePicker = null;
 
-    componentWillMount() {
-        //this.props.onDateChange(moment('1396/7/6', 'jYYYY/jM/jD'));
-    }
-
     componentDidMount() {
+
         if (this.datePicker) {
-            console.log(this.datePicker);
+            //console.log(this.datePicker);
             //console.log(this.datePicker.getValue());
             //this.props.onDateChange(this.datePicker.getValue());
             this.datePicker.setOpen(true);
@@ -80,7 +78,7 @@ class Slider extends React.Component {
                         <FormGroup style={{ textAlign: 'center' }}>
                             <ControlLabel>{labels.selectDate}</ControlLabel>
                             <DatePicker
-                                isGregorian={props.rtl !== true}
+                                isGregorian={!localization.isRTL()}
                                 timePicker={false}
                                 value={props.selectedDate}
                                 onChange={value => props.onDateChange(value)}

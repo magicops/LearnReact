@@ -1,5 +1,6 @@
 import React from 'react';
 import { ListGroup, ListGroupItem, Glyphicon, Row, Col, Button } from 'react-bootstrap';
+import localization from '../helpers/localization';
 
 const ListView = props => {
     return <ListGroup>
@@ -9,7 +10,7 @@ const ListView = props => {
                     <Col xs={8} md={10}>
                         {item.title}
                     </Col>
-                    <Col xs={4} md={2} className="text-right">
+                    <Col xs={4} md={2} className={`text-${localization.isRTL() ? 'left' : 'right'}`}>
                         <Button bsStyle="primary" className="btn-circle list-command" onClick={() => props.onUpdateItem(item.id, item.title)}>
                             <Glyphicon glyph='pencil' />
                         </Button>

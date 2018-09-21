@@ -6,8 +6,11 @@ import { actionCreators } from '../store/Lists/actionCreators';
 import Slider from '../components/Slider';
 import Loading from '../components/Loading';
 import { Lists, labels } from '../constants';
+import localization from '../helpers/localization';
 import momentJalaali from 'moment-jalaali';
 import moment from 'moment';
+
+momentJalaali.loadPersian();
 
 class CreateInspection extends Component {
     componentWillMount() {
@@ -15,6 +18,7 @@ class CreateInspection extends Component {
     }
 
     render() {
+
         if (this.props.loading)
             return <Loading loading={this.props.loading} />;
 
@@ -52,7 +56,7 @@ class CreateInspection extends Component {
                 rtl={this.props.rtl}
                 step={this.props.step}
                 selectedItems={this.props.selectedItems}
-                selectedDate={this.props.selectedDate}
+                selectedDate={this.props.selectedDate || (localization.isRTL() ? new momentJalaali() : new moment())}
                 error={this.props.error}
                 lists={lists}
                 onSave={(lists, selectedItems) => this.props.save(lists, selectedItems, this.props.selectedDate)}

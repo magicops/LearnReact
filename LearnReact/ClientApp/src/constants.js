@@ -1,4 +1,42 @@
-﻿export const labels = {
+﻿import localization from './helpers/localization';
+
+const persianLabels = {
+    lang: 'EN',
+    projectTitle: 'تمرین',
+    save: 'ذخیره',
+    departments: 'بخش',
+    rules: 'سمت',
+    procedures: 'پروسه',
+    actions: 'فعالیت',
+    select__List: '__ را انتخاب نمایید.',
+    deleteFaild: 'حذف با مشکل مواجه شد.',
+    saveFaild: 'ذخیره اطلاعات با مشکل مواجه شد.',
+    loadFaild: 'بازیابی اطلاعات با مشکل مواجه شد.',
+    resetForm: 'فرم جدید',
+    saveSuccessful: 'فرم بازرسی با موفقیت ذخیره شد.',
+    username: 'نام کاربری',
+    usernameIsRequired: 'نام کاربری را وارد کنید',
+    password: 'کلمه ی عبور',
+    passwordIsRequired: 'کلمه ی عبور را وارد کنید',
+    login: 'ورود',
+    inspectionForm: 'فرم بازرسی',
+    logout: 'خروج',
+    baseData: 'اطلاعات پایه',
+    selectAList: 'یک لیست را انتخاب کنید',
+    cancel: 'انصراف',
+    ok: 'تائید',
+    enterTitle: 'نام',
+    enterTitleError: 'نام را وارد کنید.',
+    titleExists: 'نام انتخابی موجود می باشد.',
+    addNew__: 'تعریف __ جدید',
+    Edit__: 'ویرایش __',
+    deleteModalTitle__: 'حذف __',
+    areYouSureToDelete: 'آیا مطمین هستید؟',
+    selectADate: 'تاریخ را انتخاب نمایید',
+    selectDate: 'انتخاب تاریخ'
+}
+const englishLabels = {
+    lang: 'فارسی',
     projectTitle: 'LearnReact',
     save: 'Save',
     departments: 'Departments',
@@ -31,7 +69,9 @@
     areYouSureToDelete: 'Are you sure to delete?',
     selectADate: 'Select a date',
     selectDate: 'Select date'
-};
+}
+
+export const labels = localization.isRTL() ? persianLabels : englishLabels;
 
 export const Lists = {
     departments: labels.departments,

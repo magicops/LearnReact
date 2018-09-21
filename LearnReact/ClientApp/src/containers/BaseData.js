@@ -6,6 +6,7 @@ import { actionCreators } from '../store/Lists/actionCreators';
 import Notification from '../components/Notification';
 import ListView from '../components/ListView';
 import Loading from '../components/Loading';
+import localization from '../helpers/localization';
 import { Lists, labels } from '../constants';
 
 class BaseData extends Component {
@@ -85,12 +86,12 @@ class BaseData extends Component {
                 <Col sm={4}>
                     <FormGroup>
                         <ControlLabel>{labels.selectAList}</ControlLabel>
-                        <Button bsStyle="success" className="pull-right add-item btn-circle" onClick={() => this.props.addNewItem()}>
+                        <Button bsStyle="success" className={`pull-${localization.isRTL() ? 'left' : 'right'} add-item btn-circle`} onClick={() => this.props.addNewItem()}>
                             <Glyphicon glyph='plus' />
                         </Button>
                     </FormGroup>
                     <FormGroup>
-                        <FormControl componentClass="select" onChange={(e) => this.changeList(e)}>
+                        <FormControl value={this.props.selectedList} componentClass="select" onChange={(e) => this.changeList(e)}>
                             <option>{Lists.departments}</option>
                             <option>{Lists.rules}</option>
                             <option>{Lists.procedures}</option>
